@@ -13,7 +13,9 @@
   "dependencies": {
     "@babel/plugin-external-helpers": "^7.0.0",
     "react": "16.6.1",
-    "react-native": "0.57.7"
+    "react-native": "0.57.7",
+    "react-native-gesture-handler": "^1.2.1",
+    "react-navigation": "^3.9.2"
   },
   "devDependencies": {
     "babel-jest": "24.8.0",

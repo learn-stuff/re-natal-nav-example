@@ -5,6 +5,8 @@
             [navigation-app.subs]))
 
 (def ReactNative (js/require "react-native"))
+(js/require "react-native-gesture-handler")
+(js/require "react-navigation")
 
 (def app-registry (.-AppRegistry ReactNative))
 (def text (r/adapt-react-class (.-Text ReactNative)))
