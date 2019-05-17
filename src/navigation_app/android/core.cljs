@@ -1,11 +1,12 @@
 (ns navigation-app.android.core
   (:require [reagent.core :as r :refer [atom]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
+            [re-renative.splash-screen :refer [hide-splash-screen]]
             [navigation-app.events]
             [navigation-app.subs]))
 
 (js/require "react-native-gesture-handler")
-(js/require "react-navigation")
+(js/require "react-native-splash-screen")
 
 (def ReactNative (js/require "react-native"))
 (def ReactNavigation (js/require "react-navigation"))
@@ -33,6 +34,12 @@
                            :on-press (fn []
                                        (.navigate (.-navigation (clj->js props)) "FirstScreen"))}
       [text {:style {:color "white" :text-align "center" :font-weight "bold"}} "Login"]]]))
+
+(def LoginScreenWithSplash
+  (with-meta LoginScreen
+    {:component-did-mount
+     (fn [this]
+       (hide-splash-screen))}))
 
 (defn FirstScreen []
   (fn [props]
@@ -91,12 +98,12 @@
 
 (def AppNavigator
   (create-switch-navigator
-   #js{:LoginScreen  (r/reactify-component LoginScreen)
+   #js{:LoginScreen  (r/reactify-component LoginScreenWithSplash)
        :DrawerNavigator  (r/reactify-component DrawerNavigator)}
    #js{:initialRouteName "LoginScreen"}))
 
 (defn app-root [] [:> (create-app-container AppNavigator) {}])
 
 (defn init []
-      (dispatch-sync [:initialize-db])
-      (.registerComponent app-registry "NavigationApp" #(r/reactify-component app-root)))
+  (dispatch-sync [:initialize-db])
+  (.registerComponent app-registry "NavigationApp" #(r/reactify-component app-root)))
