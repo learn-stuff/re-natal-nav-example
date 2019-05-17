@@ -11,7 +11,6 @@
 (def ReactNavigation (js/require "react-navigation"))
 (def app-registry (.-AppRegistry ReactNative))
 (def create-app-container (.-createAppContainer ReactNavigation))
-(def create-stack-navigator (.-createStackNavigator ReactNavigation))
 (def create-switch-navigator (.-createSwitchNavigator ReactNavigation))
 (def create-drawer-navigator (.-createDrawerNavigator ReactNavigation))
 (def create-stack-navigator (.-createStackNavigator ReactNavigation))
